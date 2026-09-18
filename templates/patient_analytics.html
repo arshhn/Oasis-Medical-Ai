@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Appointment Reports</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Appointment Status & Reports</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Doctor</th>
+                <th>Status</th>
+                <th>Disease Report</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appt in appointments %}
+            <tr>
+                <td>{{ appt.date }}</td>
+                <td>{{ appt.doctor_name }}</td>
+                <td>{{ appt.status }}</td>
+                <td>{{ appt.disease }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="text-align:center;">No appointments found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

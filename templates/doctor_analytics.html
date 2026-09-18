@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    body { font-family: Arial; margin: 40px; }
+    h2 { margin-top: 24px; }
+    </style>
+</head>
+<body>
+    <h1>Appointment Analytics</h1>
+    
+    <h2>Daily Appointments</h2>
+    <canvas id="dailyChart" width="600" height="300"></canvas>
+
+    <h2>Monthly Appointments</h2>
+    <canvas id="monthlyChart" width="600" height="300"></canvas>
+
+    <script>
+    // Prepare data from Flask variables
+    const dailyLabels = {{ daily_stats|map(attribute=0)|list|tojson }};
+    const dailyValues = {{ daily_stats|map(attribute=1)|list|tojson }};
+
+    const monthlyLabels = {{ monthly_stats|map(attribute=0)|list|tojson }};
+    const monthlyValues = {{ monthly_stats|map(attribute=1)|list|tojson }};
+
+    // Daily Chart
+    new Chart(document.getElementById('dailyChart'), {
+        type: 'bar',
+        data: {
+            labels: dailyLabels,
+            datasets: [{
+                label: 'Appointments',
+                data: dailyValues,
+                backgroundColor: 'rgba(54, 162, 235, 0.7)'
+            }]
+        }
+    });
+
+    // Monthly Chart
+    new Chart(document.getElementById('monthlyChart'), {
+        type: 'line',
+        data: {
+            labels: monthlyLabels,
+            datasets: [{
+                label: 'Appointments',
+                data: monthlyValues,
+                borderColor: 'rgba(255, 99, 132, 0.9)',
+                fill: false
+            }]
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Book Appointment{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card p-4">
+      <h5>Book an Appointment</h5>
+      <form method="post" action="{{ url_for('patient.appointment') }}">
+        {{ form.hidden_tag() }}
+        <div class="mb-2">{{ form.doctor.label(class="form-label") }}{{ form.doctor(class="form-select") }}</div>
+        <div class="mb-2">{{ form.appointment_date.label(class="form-label") }}{{ form.appointment_date(class="form-control") }}</div>
+        <div class="mb-2">{{ form.reason.label(class="form-label") }}{{ form.reason(class="form-control") }}</div>
+        <div class="d-grid"><button class="btn btn-primary">Book</button></div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

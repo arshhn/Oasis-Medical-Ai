@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Patient Signup{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card p-4">
+      <h4>Patient Registration</h4>
+      <form method="post" action="{{ url_for('patient.signup') }}">
+        {{ form.hidden_tag() }}
+        <div class="row">
+          <div class="col-md-6 mb-2">{{ form.name.label(class="form-label") }}{{ form.name(class="form-control") }}</div>
+          <div class="col-md-3 mb-2">{{ form.age.label(class="form-label") }}{{ form.age(class="form-control") }}</div>
+          <div class="col-md-3 mb-2">{{ form.gender.label(class="form-label") }}{{ form.gender(class="form-control") }}</div>
+        </div>
+        <div class="mb-2">{{ form.phone.label(class="form-label") }}{{ form.phone(class="form-control") }}</div>
+        <div class="mb-2">{{ form.email.label(class="form-label") }}{{ form.email(class="form-control") }}</div>
+        <div class="row">
+          <div class="col">{{ form.password.label(class="form-label") }}{{ form.password(class="form-control") }}</div>
+          <div class="col">{{ form.confirm.label(class="form-label") }}{{ form.confirm(class="form-control") }}</div>
+        </div>
+        <div class="d-grid mt-3"><button class="btn btn-primary">Register</button></div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

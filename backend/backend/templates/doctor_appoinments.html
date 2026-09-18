@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Appointments{% endblock %}
+{% block content %}
+<div class="card p-3">
+  <h5>Appointments</h5>
+  {% if appointments %}
+    <table class="table mt-3">
+      <thead>
+        <tr><th>Patient</th><th>Date</th><th>Reason</th><th>Status</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        {% for item in appointments %}
+        <tr>
+          <td>{{ item.patient.name if item.patient else "Unknown" }}</td>
+          <td>{{ item.appointment.appointment_date.strftime('%Y-%m-%d') }}</td>
+          <td>{{ item.appointment.reason }}</td>
+          <td>{{ item.appointment.status or 'N/A' }}</td>
+          <td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('doctor.update_appointment', appointment_id=item.appointment.id) }}">Update</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="text-muted">No appointments found.</div>
+  {% endif %}
+</div>
+{% endblock %}

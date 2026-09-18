@@ -1,0 +1,10 @@
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <label>Doctor</label>
+    {{ form.doctor() }}
+    <label>Date</label>
+    {{ form.appointment_date() }}
+    <label>Reason</label>
+    {{ form.reason() }}
+    {{ form.submit() }}
+</form>

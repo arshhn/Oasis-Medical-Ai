@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Patient Analytics{% endblock %}
+{% block content %}
+<div class="card p-3">
+  <h5>Appointments History</h5>
+  {% if appointments %}
+    <ul class="list-group mt-2">
+      {% for a in appointments %}
+        <li class="list-group-item d-flex justify-content-between">
+          <div>
+            <strong>{{ a.date }}</strong><br>
+            <small class="text-muted">Doctor: {{ a.doctor_name }} · {{ a.disease }}</small>
+          </div>
+          <div class="text-end">
+            <span class="badge badge-status {% if a.status=='Done' %}status-done{% elif a.status=='Cancelled' %}status-cancel{% else %}status-upcoming{% endif %}">{{ a.status }}</span>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="text-muted">No appointment records yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

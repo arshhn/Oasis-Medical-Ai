@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Patient Profile{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card p-4">
+      <h5>Profile</h5>
+      <form method="post" action="{{ url_for('patient.profile') }}">
+        {{ form.hidden_tag() }}
+        <div class="mb-2">{{ form.address.label(class="form-label") }}{{ form.address(class="form-control") }}</div>
+        <div class="mb-2 row">
+          <div class="col">{{ form.state.label(class="form-label") }}{{ form.state(class="form-control") }}</div>
+          <div class="col">{{ form.blood_group.label(class="form-label") }}{{ form.blood_group(class="form-control") }}</div>
+        </div>
+        <div class="form-check mb-2">{{ form.physically_challenged() }} {{ form.physically_challenged.label }}</div>
+        <div><button class="btn btn-primary">Save</button></div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

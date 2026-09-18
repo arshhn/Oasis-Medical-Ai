@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Doctor Analytics{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card p-3">
+      <h6>Daily Appointments</h6>
+      <canvas id="dailyChart"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card p-3">
+      <h6>Monthly Appointments</h6>
+      <canvas id="monthlyChart"></canvas>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Prepare data passed from Flask as lists of tuples: [['2025-11-01', 5], ...]
+  const dailyStats = {{ daily_stats | tojson | safe }};
+  const monthlyStats = {{ monthly_stats | tojson | safe }};
+
+  function drawChart(ctxId, stats, label) {
+    const labels = stats.map(s => s[0]);
+    const values = stats.map(s => s[1]);
+    const ctx = document.getElementById(ctxId);
+    if (!ctx) return;
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label,
+          data: values,
+          borderRadius:6,
+          barThickness:22
+        }]
+      },
+      options: {
+        responsive:true,
+        plugins:{ legend:{ display:false } }
+      }
+    });
+  }
+
+  drawChart('dailyChart', dailyStats, 'Daily');
+  drawChart('monthlyChart', monthlyStats, 'Monthly');
+</script>
+{% endblock %}

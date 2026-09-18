@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Upload Scan{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card p-4">
+      <h5>Upload Patient Scan</h5>
+      <form method="post" enctype="multipart/form-data" action="{{ url_for('upload.upload_scan') }}">
+        <div class="mb-3">
+          <label class="form-label">Select scan file</label>
+          <input class="form-control" type="file" name="scan" accept="image/*,application/dicom">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Patient ID (optional)</label>
+          <input class="form-control" name="patient_id" placeholder="123">
+        </div>
+        <div class="d-grid"><button class="btn btn-primary">Upload Scan</button></div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
